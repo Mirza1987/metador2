@@ -23,10 +23,17 @@ public class FolderFunctionModel {
 	private JTextPane tpYear = new JTextPane();
 	private JTextPane pathOutput = new JTextPane();
 	private JTextPane statusField = new JTextPane();
+	
+	private JTextPane tpArtistCopyFunction = new JTextPane();
+	private JTextPane tpAlbumCopyFunction = new JTextPane();
+	private JTextPane tpYearCopyFunction = new JTextPane();
 
 	// buttons
 	private JFileChooser chooseFolderFrame = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+	private JFileChooser chooseFileFrame = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+	
 	private JButton chooseFolderButton = new JButton("Choose folder...");
+	private JButton chooseFileButton = new JButton("Choose file...");
 	private JButton executor = new JButton("Execute");
 
 	public static ActionListener al;
@@ -47,6 +54,14 @@ public class FolderFunctionModel {
 
 	public void setChooseFolderFrame(JFileChooser chooseFolderFrame) {
 		this.chooseFolderFrame = chooseFolderFrame;
+	}
+	
+	public JFileChooser getChooseFileFrame() {
+		return chooseFileFrame;
+	}
+
+	public void setChooseFileFrame(JFileChooser chooseFolderFrame) {
+		this.chooseFileFrame = chooseFolderFrame;
 	}
 
 	public JTextPane getTpYear() {
@@ -118,7 +133,6 @@ public class FolderFunctionModel {
 
 	public void setPathOutput(JTextPane pathOutput) {
 		this.pathOutput = pathOutput;
-		// this.pathOutput.setPreferredSize(new Dimension(400, 48));
 	}
 
 	public void setChooseFolderButton(JButton chooseFolderButton) {
@@ -128,6 +142,10 @@ public class FolderFunctionModel {
 	public JButton getChooseFolderButton() {
 		return chooseFolderButton;
 	}
+	
+	public JButton getChooseFileButton() {
+		return chooseFileButton;
+	}
 
 	public JTextPane getStatusField() {
 		return statusField;
@@ -135,5 +153,17 @@ public class FolderFunctionModel {
 
 	public void setStatusField(JTextPane statusField) {
 		this.statusField = statusField;
+	}
+	
+	public JTextPane getTpArtistCopyFunction() {
+		return tpArtistCopyFunction;
+	}
+	
+	public JTextPane getTpYearCopyFunction() {
+		return tpYearCopyFunction;
+	}
+
+	public JTextPane getTpAlbumCopyFunction() {
+		return tpAlbumCopyFunction;
 	}
 }

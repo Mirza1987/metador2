@@ -41,14 +41,10 @@ public class IndexFrame extends JFrame {
 					setVisible(false);
 				}
 				else {
-//					cfm = new CopyFunctionMask();
-//					setVisible(false);
+					new CopyFunctionFrame();
+					setVisible(false);
 				}
-
 			}
 		};
 	}
-	
-	
-	
 }

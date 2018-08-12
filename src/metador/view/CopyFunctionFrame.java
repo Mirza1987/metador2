@@ -7,13 +7,13 @@ import java.io.File;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import entagged.audioformats.AudioFile;
 import entagged.audioformats.AudioFileIO;
 import entagged.audioformats.exceptions.CannotReadException;
+import entagged.audioformats.exceptions.CannotWriteException;
 import metador.controller.Executor;
 import metador.model.FolderFunctionModel;
 
@@ -52,25 +52,15 @@ public class CopyFunctionFrame extends JFrame {
 	}
 
 	private ActionListener msgForFileChooser() {
-		
 		ffm.getChooseFileFrame().setFileFilter(new FileNameExtensionFilter("MP3 Files", "mp3"));
-		
 		al = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				switch (ffm.getChooseFileFrame().showOpenDialog(contentPane)) {
 				case JFileChooser.APPROVE_OPTION:
-
-					JOptionPane.showMessageDialog(contentPane, "Cancelled", "FCDemo", JOptionPane.OK_OPTION);
-
 					break;
-
 				case JFileChooser.CANCEL_OPTION:
-					JOptionPane.showMessageDialog(contentPane, "Cancelled", "FCDemo", JOptionPane.OK_OPTION);
 					break;
-
-				case JFileChooser.ERROR_OPTION:
-					JOptionPane.showMessageDialog(contentPane, "Error", "FCDemo", JOptionPane.OK_OPTION);
 				}
 			}
 		};
@@ -81,7 +71,6 @@ public class CopyFunctionFrame extends JFrame {
 				switch (ffm.getChooseFileFrame().showSaveDialog(contentPane)) {
 				case JFileChooser.APPROVE_OPTION:
 
-					String locationPath = ffm.getChooseFileFrame().getSelectedFile().getAbsolutePath();
 					File selectedFile = ffm.getChooseFileFrame().getSelectedFile();
 										
 					if(selectedFile.getName().endsWith(".mp3")){
@@ -91,18 +80,14 @@ public class CopyFunctionFrame extends JFrame {
 							ffm.getTpArtistCopyFunction().setText(audioFile.getTag().getArtist().toString().substring(1, audioFile.getTag().getArtist().toString().length()-1));
 							ffm.getTpAlbumCopyFunction().setText(audioFile.getTag().getAlbum().toString().substring(1, audioFile.getTag().getAlbum().toString().length()-1));
 							ffm.getTpYearCopyFunction().setText(audioFile.getTag().getYear().toString().substring(1, audioFile.getTag().getYear().toString().length()-1));
-							ffm.getPathOutput().setText(locationPath);
+							
 						} catch (CannotReadException e) {
 							e.printStackTrace();
-						}						
+						}
 					}
 					break;
 				case JFileChooser.CANCEL_OPTION:
-					JOptionPane.showMessageDialog(contentPane, "Cancelled", "FCDemo", JOptionPane.OK_OPTION);
 					break;
-
-				case JFileChooser.ERROR_OPTION:
-					JOptionPane.showMessageDialog(contentPane, "Error", "FCDemo", JOptionPane.OK_OPTION);
 				}
 			}
 		};
@@ -114,22 +99,14 @@ public class CopyFunctionFrame extends JFrame {
 		executeListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-//				String year = ffm.getTfYear().getText();
-//				try {
-//					
-//					if(year!=null){
-//						Integer.parseInt(year);
-//					}
-					Executor.Execute(ffm);
-					ffm.getStatusField().setText("DONE!");
-					
-//				} catch (Exception e1) {
-//					System.out.println(e1);
-//					ffm.getStatusField().setText("Year must be number");
-//				}
+					try {
+						Executor.ExecuteCopyFunction(ffm);
+					} catch (CannotReadException | CannotWriteException e) {
+						e.printStackTrace();
+					}
+					ffm.getStatusField().setText("DONE!");	
 			}
 		};
 		return executeListener;
 	}
-
 }

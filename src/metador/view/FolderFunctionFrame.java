@@ -52,17 +52,10 @@ public class FolderFunctionFrame extends JFrame {
 			public void actionPerformed(ActionEvent ae) {
 				switch (ffm.getChooseFolderFrame().showOpenDialog(contentPane)) {
 				case JFileChooser.APPROVE_OPTION:
-
 					JOptionPane.showMessageDialog(contentPane, "Cancelled", "FCDemo", JOptionPane.OK_OPTION);
-
 					break;
-
 				case JFileChooser.CANCEL_OPTION:
-					JOptionPane.showMessageDialog(contentPane, "Cancelled", "FCDemo", JOptionPane.OK_OPTION);
 					break;
-
-				case JFileChooser.ERROR_OPTION:
-					JOptionPane.showMessageDialog(contentPane, "Error", "FCDemo", JOptionPane.OK_OPTION);
 				}
 			}
 		};
@@ -76,13 +69,8 @@ public class FolderFunctionFrame extends JFrame {
 					locationPath = locationPath.substring(locationPath.length() - 20, locationPath.length());
 					ffm.getPathOutput().setText(locationPath);
 					break;
-
 				case JFileChooser.CANCEL_OPTION:
-					JOptionPane.showMessageDialog(contentPane, "Cancelled", "FCDemo", JOptionPane.OK_OPTION);
 					break;
-
-				case JFileChooser.ERROR_OPTION:
-					JOptionPane.showMessageDialog(contentPane, "Error", "FCDemo", JOptionPane.OK_OPTION);
 				}
 			}
 		};
@@ -94,22 +82,10 @@ public class FolderFunctionFrame extends JFrame {
 		executeListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-//				String year = ffm.getTfYear().getText();
-//				try {
-//					
-//					if(year!=null){
-//						Integer.parseInt(year);
-//					}
-					Executor.Execute(ffm);
-					ffm.getStatusField().setText("DONE!");
-					
-//				} catch (Exception e1) {
-//					System.out.println(e1);
-//					ffm.getStatusField().setText("Year must be number");
-//				}
+				Executor.Execute(ffm);
+				ffm.getStatusField().setText("DONE!");	
 			}
 		};
 		return executeListener;
 	}
-
 }
